@@ -1,4 +1,4 @@
-name: ReleaseNotice
+name: PushNotice
 on:
   push:
     branches:
