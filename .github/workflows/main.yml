@@ -30,16 +30,19 @@ jobs:
                   "type": "context",
                   "elements": [
                     {
-                      "text": "*26 Aug 2022*  |  v2.5.1-rc.1",
+                      "text": "*$(date +'%d %m %Y')*  |  ${{ github.event.release.tag_name }}",
                       "type": "mrkdwn"
                     }
                   ]
                 },
                 {
+                  "type": "divider"
+                },
+                {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                    "text": ${{ toJSON(github.event.release.body) }}
                   }
                 }
               ]
