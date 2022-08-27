@@ -1,4 +1,4 @@
-name: PushNotice
+name: ReleaseNotice
 on:
   release:
     types: [published]
