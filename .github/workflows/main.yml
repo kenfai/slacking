@@ -1,8 +1,7 @@
-name: PushNotice
+name: Release Notice
 on:
-  push:
-    branches:
-      - 'main'
+  release:
+    types: [published]
   workflow_dispatch:
 jobs:
   build:
@@ -19,8 +18,23 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
               "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": ":large_blue_circle: HR Staging Portal"
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "text": "*26 Aug 2022*  |  v2.5.1-rc.1",
+                      "type": "mrkdwn"
+                    }
+                  ]
+                },
                 {
                   "type": "section",
                   "text": {
@@ -30,3 +44,15 @@ jobs:
                 }
               ]
             }
+  dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: cupcakearmy/confluence-markdown-sync@v1.0.1
+        with:
+          from: './README.md'
+          to: '40861697' # The confluence page id where to write the output
+          cloud: mednefits
+          user: kenfai@mednefits.com
+          token: ${{ secrets.CONFLUENCE }}
