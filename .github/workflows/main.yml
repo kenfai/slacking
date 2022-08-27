@@ -30,7 +30,7 @@ jobs:
                   "type": "context",
                   "elements": [
                     {
-                      "text": "*$(date +'%d %m %Y')*  |  ${{ github.event.release.tag_name }}",
+                      "text": "*${{ github.event.release.published_at }}*  |  ${{ github.event.release.tag_name }}",
                       "type": "mrkdwn"
                     }
                   ]
