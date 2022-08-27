@@ -1,9 +1,8 @@
-name: ReleaseNotice
+name: PushNotice
 on:
   push:
     branches:
       - 'staging'
-  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
