@@ -19,6 +19,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          NA: N/A
         with:
           # For posting a rich message using Block Kit
           payload: |
@@ -71,7 +72,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": ${{ toJson(github.event.pull_request.body) || toJson(github.event.comment.body) || "N/A" }}
+                        "text": ${{ toJson(github.event.pull_request.body) || toJson(github.event.comment.body) || env.NA }}
                       }
                     }
                   ]
