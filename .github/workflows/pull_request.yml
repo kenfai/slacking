@@ -58,7 +58,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*branch:* ${{ github.ref_name }}"
+                        "text": "*Branch:* ${{ github.head_ref }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Message:*"
                       }
                     },
                     {
@@ -116,7 +123,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*branch:* ${{ github.ref_name }}"
+                        "text": "*Branch:* ${{ github.head_ref }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Message:*"
                       }
                     },
                     {
@@ -174,7 +188,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*branch:* ${{ github.ref_name }}"
+                        "text": "*Branch:* ${{ github.head_ref }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Message:*"
                       }
                     },
                     {
