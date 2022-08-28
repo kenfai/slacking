@@ -1,13 +1,15 @@
-name: Release Notice
+name: Pull Request Notice
 on:
-  release:
-    types: [published]
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # To check the github context
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.21.0
@@ -26,14 +28,14 @@ jobs:
                       "type": "header",
                       "text": {
                         "type": "plain_text",
-                        "text": ":large_blue_circle: HR Staging Portal"
+                        "text": ":repeat_one: PR: ${{ github.event.repository.name }}"
                       }
                     },
                     {
                       "type": "context",
                       "elements": [
                         {
-                          "text": "*${{ github.event.release.published_at }}*  |  ${{ github.event.release.tag_name }}",
+                          "text": "*${{ github.event.pull_request.created_at }}*  |  By: ${{ github.event.pull_request.user.login }}",
                           "type": "mrkdwn"
                         }
                       ]
@@ -45,22 +47,17 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": ${{ toJSON(github.event.release.body) }}
+                        "text": "*${{ toJSON(github.event.pull_request.title) }}*\n${{ toJSON(github.event.pull_request.html_url) }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJSON(github.event.pull_request.body) }}
                       }
                     }
                   ]
                 }
               ]
             }
-  dev:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: cupcakearmy/confluence-markdown-sync@v1.0.1
-        with:
-          from: './README.md'
-          to: '40861697' # The confluence page id where to write the output
-          cloud: mednefits
-          user: kenfai@mednefits.com
-          token: ${{ secrets.CONFLUENCE }}
