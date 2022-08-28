@@ -19,7 +19,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          BODY: ${{ toJson(github.event.pull_request.body) || github.event.pull_request.body }}
+          BODY: ${{ toJson(github.event.pull_request.body || "n/a") }}
         with:
           # For posting a rich message using Block Kit
           payload: |
