@@ -58,14 +58,21 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*branch:* ${{ github.ref_name }}"
+                        "text": "*Branch:* ${{ github.head_ref }}"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": ${{ toJSON(github.event.pull_request.body) }}
+                        "text": "*Message:*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJSON(github.event.pull_request.body) || '' }}
                       }
                     }
                   ]
@@ -116,14 +123,21 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*branch:* ${{ github.ref_name }}"
+                        "text": "*Branch:* ${{ github.head_ref }}"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": ${{ toJSON(github.event.pull_request.body) }}
+                        "text": "*Message:*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJSON(github.event.pull_request.body) || '' }}
                       }
                     }
                   ]
@@ -174,14 +188,21 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*branch:* ${{ github.ref_name }}"
+                        "text": "*Branch:* ${{ github.head_ref }}"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": ${{ toJSON(github.event.pull_request.body) }}
+                        "text": "*Message:*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJSON(github.event.pull_request.body) || '' }}
                       }
                     }
                   ]
