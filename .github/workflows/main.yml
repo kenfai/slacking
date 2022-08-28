@@ -18,32 +18,37 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "blocks": [
+              "attachments": [
                 {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": ":large_blue_circle: HR Staging Portal"
-                  }
-                },
-                {
-                  "type": "context",
-                  "elements": [
+                  "color": "#36a64f",
+                  "blocks": [
                     {
-                      "text": "*${{ github.event.release.published_at }}*  |  ${{ github.event.release.tag_name }}",
-                      "type": "mrkdwn"
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": ":large_blue_circle: HR Staging Portal"
+                      }
+                    },
+                    {
+                      "type": "context",
+                      "elements": [
+                        {
+                          "text": "*${{ github.event.release.published_at }}*  |  ${{ github.event.release.tag_name }}",
+                          "type": "mrkdwn"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJSON(github.event.release.body) }}
+                      }
                     }
                   ]
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": ${{ toJSON(github.event.release.body) }}
-                  }
                 }
               ]
             }
