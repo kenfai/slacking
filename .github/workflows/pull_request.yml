@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Send Open PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: ${{ github.event.pull_request.state == "open" }}
+        if: github.event.pull_request.state == 'open'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
@@ -74,7 +74,7 @@ jobs:
             }
       - name: Send Merged PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: ${{ github.event.pull_request.state == "closed" && github.event.pull_request.merged }}
+        if: github.event.pull_request.state == 'closed' && github.event.pull_request.merged
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
@@ -132,7 +132,7 @@ jobs:
             }
       - name: Send Closed PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: ${{ github.event.pull_request.state == "closed" && ! github.event.pull_request.merged }}
+        if: github.event.pull_request.state == 'closed' && ! github.event.pull_request.merged
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
