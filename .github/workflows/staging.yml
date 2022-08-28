@@ -31,7 +31,7 @@ jobs:
                   "type": "context",
                   "elements": [
                     {
-                      "text": "*${{ github.event.pull_request.merged_at }}*  |  ${{ github.event.pull_request.milestone }}",
+                      "text": "*${{ github.event.pull_request.merged_at }}*  |  ${{ github.event.pull_request.milestone.title }}",
                       "type": "mrkdwn"
                     }
                   ]
@@ -44,6 +44,13 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": ${{ toJSON(github.event.pull_request.body) }}
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "@qa ready for testing. Thanks! :pray:"
                   }
                 }
               ]
