@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Send Open PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: github.event.pull_request.state == 'open'
+        if: github.event.pull_request.state == 'open' || github.event.issue.pull_request.state == 'open'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
@@ -64,7 +64,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*\n${{ github.event.pull_request.body }}"
+                        "text": "*Message:*\n${{ github.event.pull_request.body || github.event.comment.body }}"
                       }
                     }
                   ]
