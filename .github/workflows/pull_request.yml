@@ -3,6 +3,7 @@ on:
   pull_request:
     types:
       - opened
+      - closed
     branches:
       - 'main'
   issue_comment:
@@ -139,11 +140,11 @@ jobs:
             }
       - name: Send Closed PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: github.event.issue.state == 'closed'
+        if: (github.event.pull_request.state == 'closed' && ! github.event.pull_request.merged) || github.event.issue.state == 'closed'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          BODY: ${{ toJson(github.event.comment.body) || github.event.comment.body }}
+          BODY: ${{ toJson(github.event.comment.body || github.event.pull_request.body || "n/a") }}
         with:
           # For posting a rich message using Block Kit
           payload: |
