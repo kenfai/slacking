@@ -65,7 +65,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*\n${{ env.BODY }}"
+                        "text": "*Message:*"
+                      }
+                    }
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ env.BODY }}
                       }
                     }
                   ]
