@@ -164,7 +164,7 @@ jobs:
                       "type": "context",
                       "elements": [
                         {
-                          "text": "*${{ github.event.pull_request.closed_at ||| github.event.issue.closed_at }}*  |  Closed by: ${{ github.event.pull_request.user.login || github.event.comment.user.login }}",
+                          "text": "*${{ github.event.pull_request.closed_at || github.event.issue.closed_at }}*  |  Closed by: ${{ github.event.pull_request.user.login || github.event.comment.user.login }}",
                           "type": "mrkdwn"
                         }
                       ]
