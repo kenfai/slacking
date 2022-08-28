@@ -58,7 +58,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Branch:* ${{ github.head_ref }}"
+                        "text": "*Branch:* `${{ github.head_ref }}`"
                       }
                     },
                     {
