@@ -162,7 +162,7 @@ jobs:
                       "type": "context",
                       "elements": [
                         {
-                          "text": "*${{ github.event.pull_request.created_at }}*  |  Closed by: ${{ github.event.pull_request.user.login }}",
+                          "text": "*${{ github.event.issue.closed_at }}*  |  Closed by: ${{ github.event.comment.user.login }}",
                           "type": "mrkdwn"
                         }
                       ]
@@ -174,21 +174,21 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*${{ github.event.pull_request.title }}*\n${{ github.event.pull_request.html_url }}"
+                        "text": "*${{ github.event.issue.title }}*\n${{ github.event.issue.html_url }}"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Branch:* ${{ github.head_ref }}"
+                        "text": "*Branch:* ${{ github.ref_name }}"
                       }
                     },
                     {
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Comment:"
+                        "text": "*Comment:*"
                       }
                     },
                     {
