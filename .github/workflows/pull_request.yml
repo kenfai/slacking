@@ -64,7 +64,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*\n${{ github.event.pull_request.body || github.event.comment.body }}"
+                        "text": "*Message:*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJson(github.event.pull_request.body) || toJson(github.event.comment.body) || "N/A" }}
                       }
                     }
                   ]
