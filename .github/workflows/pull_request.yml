@@ -3,7 +3,6 @@ on:
   pull_request:
     types:
       - opened
-      - closed
     branches:
       - 'main'
   issue_comment:
@@ -74,7 +73,7 @@ jobs:
             }
       - name: Send Merged PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: github.event.pull_request.state == 'closed' && github.event.pull_request.merged
+        if: github.event.issue.pull_request.state == 'closed' && github.event.issue.pull_request.merged
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
@@ -97,7 +96,7 @@ jobs:
                       "type": "context",
                       "elements": [
                         {
-                          "text": "*${{ github.event.pull_request.created_at }}*  |  Merged by: ${{ github.event.pull_request.user.login }}",
+                          "text": "*${{ github.event.issue.pull_request.created_at }}*  |  Merged by: ${{ github.event.issue.pull_request.user.login }}",
                           "type": "mrkdwn"
                         }
                       ]
@@ -109,7 +108,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*${{ github.event.pull_request.title }}*\n${{ github.event.pull_request.html_url }}"
+                        "text": "*${{ github.event.issue.pull_request.title }}*\n${{ github.event.issue.pull_request.html_url }}"
                       }
                     },
                     {
@@ -123,7 +122,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*\n${{ github.event.pull_request.body }}"
+                        "text": "*Message:*\n${{ github.event.comment.body }}"
                       }
                     }
                   ]
@@ -132,7 +131,7 @@ jobs:
             }
       - name: Send Closed PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: github.event.pull_request.state == 'closed' && ! github.event.pull_request.merged
+        if: github.event.issue.pull_request.state == 'closed' && ! github.event.issue.pull_request.merged
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
