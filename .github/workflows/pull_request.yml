@@ -67,7 +67,7 @@ jobs:
                         "type": "mrkdwn",
                         "text": "*Message:*"
                       }
-                    }
+                    },
                     {
                       "type": "section",
                       "text": {
