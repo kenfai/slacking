@@ -65,14 +65,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "$BODY"
+                        "text": "*Message:*\n${{ env.BODY }}"
                       }
                     }
                   ]
@@ -139,7 +132,7 @@ jobs:
             }
       - name: Send Closed PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: github.event.issue.pull_request.state == 'closed' || ! github.event.issue.pull_request.merged
+        if: github.event.issue.pull_request.state == 'closed' && ! github.event.issue.pull_request.merged
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
@@ -188,7 +181,14 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Comment:*\n${{ github.event.comment.body }}"
+                        "text": "*Comment:"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "${{ github.event.comment.body }}"
                       }
                     }
                   ]
