@@ -132,7 +132,7 @@ jobs:
             }
       - name: Send Closed PR Body to Slack
         uses: slackapi/slack-github-action@v1.21.0
-        if: github.event.issue.pull_request.state == 'closed' && ! github.event.issue.pull_request.merged
+        if: github.event.issue.pull_request.state == 'closed'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
@@ -155,7 +155,7 @@ jobs:
                       "type": "context",
                       "elements": [
                         {
-                          "text": "*${{ github.event.pull_request.created_at }}*  |  Merged by: ${{ github.event.pull_request.user.login }}",
+                          "text": "*${{ github.event.pull_request.created_at }}*  |  Closed by: ${{ github.event.pull_request.user.login }}",
                           "type": "mrkdwn"
                         }
                       ]
