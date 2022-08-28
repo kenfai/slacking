@@ -7,7 +7,7 @@ on:
     branches:
       - 'main'
   issue_comment:
-    types: 
+    types:
       - created
   workflow_dispatch:
 jobs:
@@ -65,14 +65,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": ${{ toJSON(github.event.pull_request.body) || '' }}
+                        "text": "*Message:*\n${{ github.event.pull_request.body }}"
                       }
                     }
                   ]
@@ -130,14 +123,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": ${{ toJSON(github.event.pull_request.body) || '' }}
+                        "text": "*Message:*\n${{ github.event.pull_request.body }}"
                       }
                     }
                   ]
@@ -195,14 +181,7 @@ jobs:
                       "type": "section",
                       "text": {
                         "type": "mrkdwn",
-                        "text": "*Message:*"
-                      }
-                    },
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": ${{ github.event.pull_request.body }}
+                        "text": "*Comment:*\n${{ github.event.comment.body }}"
                       }
                     }
                   ]
