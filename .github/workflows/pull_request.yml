@@ -1,0 +1,206 @@
+name: Pull Request Notice
+on:
+  pull_request:
+    types:
+      - opened
+      - closed
+    branches:
+      - 'main'
+  issue_comment:
+    types:
+      - created
+  workflow_dispatch:
+jobs:
+  open_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Open PR Body to Slack
+        uses: slackapi/slack-github-action@v1.21.0
+        if: github.event.pull_request.state == 'open' || github.event.issue.pull_request.state == 'open'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          BODY: n/a
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "attachments": [
+                {
+                  "color": "#36a64f",
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": ":recycle: PR: ${{ github.event.repository.name }}"
+                      }
+                    },
+                    {
+                      "type": "context",
+                      "elements": [
+                        {
+                          "text": "*${{ github.event.pull_request.created_at }}*  |  Opened by: ${{ github.event.pull_request.user.login }}",
+                          "type": "mrkdwn"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*${{ github.event.pull_request.title }}*\n${{ github.event.pull_request.html_url }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Branch:* `${{ github.head_ref }}`"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Message:*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJson(github.event.pull_request.body || env.BODY) }}
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+      - name: Send Merged PR Body to Slack
+        uses: slackapi/slack-github-action@v1.21.0
+        if: github.event.issue.pull_request.state == 'closed' && github.event.issue.pull_request.merged
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "attachments": [
+                {
+                  "color": "#8250df",
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": ":scorpius: PR: ${{ github.event.repository.name }}"
+                      }
+                    },
+                    {
+                      "type": "context",
+                      "elements": [
+                        {
+                          "text": "*${{ github.event.issue.pull_request.created_at }}*  |  Merged by: ${{ github.event.issue.pull_request.user.login }}",
+                          "type": "mrkdwn"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*${{ github.event.issue.pull_request.title }}*\n${{ github.event.issue.pull_request.html_url }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Branch:* ${{ github.head_ref }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Message:*\n${{ github.event.comment.body }}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+      - name: Send Closed PR Body to Slack
+        uses: slackapi/slack-github-action@v1.21.0
+        if: (github.event.pull_request.state == 'closed' && ! github.event.pull_request.merged) || github.event.issue.state == 'closed'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          BODY: n/a
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "attachments": [
+                {
+                  "color": "#cf222e",
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": ":x: PR: ${{ github.event.repository.name }}"
+                      }
+                    },
+                    {
+                      "type": "context",
+                      "elements": [
+                        {
+                          "text": "*${{ github.event.pull_request.closed_at || github.event.issue.closed_at }}*  |  Closed by: ${{ github.event.pull_request.user.login || github.event.comment.user.login }}",
+                          "type": "mrkdwn"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "divider"
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*${{ github.event.*.title }}*\n${{ github.event.*.html_url }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Branch:* ${{ github.ref_name }}"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*Comment:*"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": ${{ toJson(github.event.comment.body || github.event.pull_request.body || env.BODY) }}
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
