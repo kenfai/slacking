@@ -36,8 +36,8 @@ jobs:
                   "type": "context",
                   "elements": [
                     {
-                      "type": "mrkdwn"
-                      "text": "*${{ steps.formatdate.outputs.date }}*  | <!date^${{ github.event.pull_request.merged_at }}^{date_num} at {time_secs}> | ${{ github.event.pull_request.title }}",
+                      "type": "mrkdwn",
+                      "text": "*${{ steps.formatdate.outputs.date }}*  | <!date^${{ github.event.pull_request.merged_at }}^{date_num} at {time_secs}> | ${{ github.event.pull_request.title }}"
                     }
                   ]
                 },
