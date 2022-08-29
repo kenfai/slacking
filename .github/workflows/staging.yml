@@ -1,3 +1,4 @@
+name: Staging Notice
 on:
   pull_request:
     types:
@@ -6,12 +7,12 @@ on:
       - 'staging'
   workflow_dispatch:
 jobs:
-  build:
+  post_to_slack:
     runs-on: ubuntu-latest
     steps:
       - name: Get formatted date from runner
         id: formatdate
-        run: echo "::set-output name=date::$(date -d '+8 hour' +'%Y-%m-%d at %H:%M:%S')"
+        run: echo "::set-output name=DATENOW::$(date -d '+8 hour' +'%Y-%m-%d at %H:%M:%S')"
       - name: Send custom JSON data to Slack webhook
         id: slack
         uses: slackapi/slack-github-action@v1.21.0
@@ -37,7 +38,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": "${{ steps.formatdate.outputs.date }} | ${{ github.event.pull_request.title }}"
+                      "text": "${{ steps.formatdate.outputs.DATENOW }} | ${{ github.event.pull_request.title }}"
                     }
                   ]
                 },
