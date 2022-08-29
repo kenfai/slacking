@@ -36,8 +36,8 @@ jobs:
                   "type": "context",
                   "elements": [
                     {
-                      "text": "*${{ steps.date.outputs.date }}*  |  ${{ github.event.pull_request.title }}",
                       "type": "mrkdwn"
+                      "text": "*${{ steps.formatdate.outputs.date }}*  | <!date^${{ github.event.pull_request.merged_at }}^{date_num} at {time_secs}> | ${{ github.event.pull_request.title }}",
                     }
                   ]
                 },
@@ -49,13 +49,6 @@ jobs:
                   "text": {
                     "type": "mrkdwn",
                     "text": ${{ toJSON(github.event.pull_request.body || env.BODY) }}
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "qa ready for testing. Thanks! :pray:"
                   }
                 }
               ]
