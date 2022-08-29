@@ -6,12 +6,12 @@ Release Notes
 
     a. **POS Syetem**
     
-    - Fix the numpad
-    - Fix display
+    i) Fix the numpad
+    ii) Fix display
     
     b. **Hardware**
     
-    - Replace key
+    i) Replace key
     
 2. **BACK OFFICE**
 
