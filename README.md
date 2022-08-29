@@ -4,7 +4,7 @@ Release Notes
 
 1. **STORE FRONT**
 
-    a. **POS Syetem**
+    a. **POS Cashier System**
     
     i) Fix the numpad
     ii) Fix display
