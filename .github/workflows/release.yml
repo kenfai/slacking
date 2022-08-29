@@ -1,0 +1,79 @@
+name: Release Notice
+on:
+  release:
+    types: [released]
+  workflow_dispatch:
+jobs:
+  syncreleasenote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - uses: cupcakearmy/confluence-markdown-sync@v1.0.1
+        with:
+          from: './README.md'
+          to: '40861697' # The confluence page id where to write the output
+          cloud: mednefits
+          user: kenfai@mednefits.com
+          token: ${{ secrets.CONFLUENCE }}
+  post_to_slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get formatted date from runner
+        id: formatdate
+        run: echo "::set-output name=DATENOW::$(date -d '+8 hour' +'%Y-%m-%d at %H:%M:%S')"
+      - name: Send custom JSON data to Slack webhook
+        id: slack
+        uses: slackapi/slack-github-action@v1.21.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          BODY: _n/a_
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": ":megaphone: HR Portal Release ${{ github.event.release.name }}"
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*${{ steps.formatdate.outputs.DATENOW }}* | Released by: @${{ github.event.release.author.login }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Release Note:*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{ toJSON(github.event.release.body || env.BODY) }}
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "<https://mednefits.atlassian.net/wiki/spaces/mednefitstech/pages/23265287|*Read Release Note on Confluence*>"
+                  }
+                }
+              ]
+            }
