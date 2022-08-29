@@ -39,7 +39,7 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": ":megaphone: HR Portal Release ${{ github.event.release.name }}"
+                    "text": ":mega: HR Portal Release ${{ github.event.release.name }}"
                   }
                 },
                 {
@@ -72,7 +72,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "<https://mednefits.atlassian.net/wiki/spaces/mednefitstech/pages/23265287|*Read Release Note on Confluence*>"
+                    "text": ":memo: <https://mednefits.atlassian.net/wiki/spaces/~61da9354e7637900683d2837/pages/40861697|*Read Release Note on Confluence*> :link:"
                   }
                 }
               ]
