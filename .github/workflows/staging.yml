@@ -38,7 +38,7 @@ jobs:
                   "elements": [
                     {
                       "type": "mrkdwn",
-                      "text": "${{ steps.formatdate.outputs.DATENOW }} | ${{ github.event.pull_request.title }}"
+                      "text": "*${{ steps.formatdate.outputs.DATENOW }}* | ${{ github.event.pull_request.title }}"
                     }
                   ]
                 },
