@@ -2,23 +2,16 @@ Release Notes
 
 # 2 Sep 2022 - Release 2.5.2
 
-1. **STORE FRONT**
-
-    a. **POS Cashier System**
-    
-    i) Fix the numpad
-    ii) Fix display
-    
-    b. **Hardware**
-    
-    i) Replace key
-    
-2. **BACK OFFICE**
-
-    a. _Accounting_
-    
-    - _Credit_ balance
-    - Debit _audit_
+# **STORE FRONT**
+## **POS Cashier System**
+### Fix the numpad
+### Fix display
+## **Hardware**
+### Replace key
+# **BACK OFFICE**
+## _Accounting_
+#* _Credit_ balance
+##* Debit _audit_
 
 # 26 Aug 2022 - Release 2.5.1
 
