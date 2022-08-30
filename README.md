@@ -4,22 +4,22 @@ Release Notes
 
 1. **STORE FRONT**
 
-   a. **POS Cashier System**
+    a. **POS Cashier System**
 
-      i. Fix the numpad
-      ii. Fix display
+    - Fix the numpad
+    - Fix display
 
-   b. **Hardware**
+    b. **Hardware**
 
-      i. Replace key
+    - Replace key
         
 2. **BACK OFFICE**
 
    a. _Accounting_
     
-      i. _Credit_ balance
+      - _Credit_ balance
 
-      ii. Debit _audit_
+      - Debit _audit_
 
 # 26 Aug 2022 - Release 2.5.1
 
