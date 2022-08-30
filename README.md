@@ -3,10 +3,14 @@ Release Notes
 # 2 Sep 2022 - Release 2.5.2
 
 1. **STORE FRONT**
+
    a. **POS Cashier System**
+
       i. Fix the numpad
       ii. Fix display
+
    b. **Hardware**
+
       i. Replace key
         
 2. **BACK OFFICE**
