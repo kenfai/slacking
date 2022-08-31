@@ -15,11 +15,11 @@ Release Notes
         
 2. **BACK OFFICE**
 
-   a. _Accounting_
+    a. _Accounting_
     
-      - _Credit_ balance
+    - _Credit_ balance
 
-      - Debit _audit_
+    - Debit _audit_
 
 # 26 Aug 2022 - Release 2.5.1
 
