@@ -8,6 +8,7 @@ Release Notes
 
     - Fix the numpad
     - Fix display
+    - Fix diskette drives
 
     b. **Hardware**
 
