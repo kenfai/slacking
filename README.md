@@ -1,5 +1,26 @@
 Release Notes
 
+# 2 Sep 2022 - Release 2.5.2
+
+1. **STORE FRONT**
+
+    a. **POS Cashier System**
+
+    - Fix the numpad
+    - Fix display
+
+    b. **Hardware**
+
+    - Replace key
+        
+2. **BACK OFFICE**
+
+    a. _Accounting_
+    
+    - _Credit_ balance
+
+    - Debit _audit_
+
 # 26 Aug 2022 - Release 2.5.1
 
 1. **BACKEND**
@@ -11,16 +32,16 @@ Release Notes
     
     b. **Controller**
     
-    - Resolve this
-    - Resolve htat
+    - MySQL
+    - Postgresl
     
 2. **FRONTEND**
  
-    a. Previos time
+    a. VueJS
     
     - Never fixed
     - Tuple to List
     
-    b. Tenchical
+    b. ReactJS
     
-END.
+*END.*
