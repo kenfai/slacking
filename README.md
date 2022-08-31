@@ -9,6 +9,7 @@ Release Notes
     - Fix the numpad
     - Fix display
     - Fix drone
+    - Fix diskette drives
 
     b. **Hardware**
 
