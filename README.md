@@ -10,6 +10,8 @@ Release Notes
     - Fix display
         - Adjust font size
         - Remove spacing below
+            - Further check bottom padding
+            - Further further
     - Fix diskette drives
 
     b. **Hardware**
