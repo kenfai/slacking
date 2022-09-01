@@ -8,6 +8,8 @@ Release Notes
 
     - Fix the numpad
     - Fix display
+        - Adjust font size
+        - Remove spacing below
     - Fix diskette drives
 
     b. **Hardware**
@@ -19,6 +21,7 @@ Release Notes
     a. _Accounting_
     
     - _Credit_ balance
+        - Align columns
 
     - Debit _audit_
 
